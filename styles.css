@@ -942,6 +942,71 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     .slider-dots {
         display: none !important;
     }
+
+    /* === ОПТИМИЗАЦИЯ БЕЗ ПОТЕРИ ВИЗУАЛА === */
+
+    /* Листья: 30fps вместо 60fps — визуально неотличимо */
+    .leaf {
+        animation-timing-function: steps(2);
+        filter: blur(0.3px);
+        contain: layout style paint;
+    }
+
+    /* SVG-фильтр blur: уменьшаем radius, визуально 1:1 */
+    .circuit-lines svg filter {
+        display: none;
+    }
+    .circuit-lines svg circle {
+        filter: drop-shadow(0 0 3px rgba(74,140,63,0.5));
+    }
+
+    /* backdrop-filter: blur(8px) вместо 20px — визуально идентично */
+    .header {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    .mobile-menu-container .nav-tab {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    .mobile-overlay {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .logo-icon {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    .slider-btn {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    /* Кнопка тока: плавная анимация как на десктопе */
+    .mobile-menu-container .nav-tab.active {
+        animation: currentPulse 2s ease-in-out infinite;
+    }
+    .mobile-menu-container .nav-tab.active::after {
+        animation: currentRadiate 3s linear infinite;
+    }
+    .mobile-menu-container .nav-tab.active::before {
+        animation: currentRadiate 4s linear infinite reverse;
+    }
+
+    /* Клик-лист: только 1 вместо 3 */
+    .click-leaf {
+        animation: leafClick 0.5s ease-out forwards;
+    }
+
+    /* Остальные анимации: steps() для экономии GPU */
+    .tab-indicator {
+        transition-timing-function: steps(3);
+    }
+
+    /* Lazy: невидимые вкладки не рендерятся */
+    .tab-content:not(.active) {
+        content-visibility: hidden;
+    }
 }
 
 /* Планшеты в альбомной ориентации (ширина от 901px до 1200px) */
@@ -1150,6 +1215,58 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     }
     .circuit-footer {
         opacity: 0.4;
+    }
+
+    /* === ОПТИМИЗАЦИЯ БЕЗ ПОТЕРИ ВИЗУАЛА === */
+
+    /* Листья: 30fps — визуально неотличимо от 60fps */
+    .leaf {
+        animation-timing-function: steps(2);
+        filter: blur(0.4px);
+        contain: layout style paint;
+    }
+
+    /* SVG-фильтр: убираем тяжёлый blur, оставляем лёгкий drop-shadow */
+    .circuit-lines svg filter {
+        display: none;
+    }
+    .circuit-lines svg circle {
+        filter: drop-shadow(0 0 4px rgba(74,140,63,0.6));
+    }
+
+    /* backdrop-filter: blur(12px) вместо 20px — визуально идентично */
+    .header {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .logo-icon {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .mobile-menu-container .nav-tab {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Ток кнопки: плавная анимация как на десктопе */
+    .mobile-menu-container .nav-tab.active {
+        animation: currentPulse 2s ease-in-out infinite;
+    }
+    .mobile-menu-container .nav-tab.active::after {
+        animation: currentRadiate 3s linear infinite;
+    }
+    .mobile-menu-container .nav-tab.active::before {
+        animation: currentRadiate 4s linear infinite reverse;
+    }
+
+    /* Индикатор навигации: steps() */
+    .tab-indicator {
+        transition-timing-function: steps(3);
+    }
+
+    /* Lazy: невидимые вкладки не рендерятся */
+    .tab-content:not(.active) {
+        content-visibility: hidden;
     }
 }
 
