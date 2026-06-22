@@ -397,11 +397,20 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     isolation: isolate;
 }
 
-/* Current animation — compositor-only for 90fps */
+/* Current animation — pulsing glow */
 @keyframes currentPulse {
-    0% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.8; }
+    0%, 100% {
+        box-shadow:
+            0 0 0 2px rgba(74,140,63,0.5),
+            0 0 12px 3px rgba(74,140,63,0.3),
+            0 0 24px 6px rgba(74,140,63,0.15);
+    }
+    50% {
+        box-shadow:
+            0 0 0 3px rgba(124,185,110,0.7),
+            0 0 18px 5px rgba(74,140,63,0.5),
+            0 0 36px 10px rgba(74,140,63,0.25);
+    }
 }
 @keyframes currentRadiate {
     from { transform: rotate(0deg); }
@@ -851,7 +860,6 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     /* GPU promotion for all animated elements — 90fps */
     .leaf { contain: layout style paint; will-change: transform; }
     .circuit-lines svg circle { will-change: transform; contain: layout style paint; }
-    .mobile-menu-container .nav-tab.active { will-change: transform; }
     .mobile-menu-container .nav-tab.active::after { will-change: transform; }
     .mobile-menu-container .nav-tab.active::before { will-change: transform; }
     .click-leaf { will-change: transform, opacity; }
@@ -887,15 +895,17 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     .logo-icon { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform 0.15s; }
     .slider-btn { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 
-    /* Faster button current animations */
+    /* Faster & brighter button current — visible on mobile */
     .mobile-menu-container .nav-tab.active {
         animation: currentPulse 1.5s ease-in-out infinite;
     }
     .mobile-menu-container .nav-tab.active::after {
         animation: currentRadiate 2s linear infinite;
+        filter: drop-shadow(0 0 4px rgba(74,140,63,0.6));
     }
     .mobile-menu-container .nav-tab.active::before {
         animation: currentRadiate 2.5s linear infinite reverse;
+        filter: drop-shadow(0 0 6px rgba(74,140,63,0.4));
     }
 
     /* Faster click leaf */
@@ -973,7 +983,6 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     /* GPU promotion for all animated elements — 90fps */
     .leaf { contain: layout style paint; will-change: transform; }
     .circuit-lines svg circle { will-change: transform; contain: layout style paint; }
-    .mobile-menu-container .nav-tab.active { will-change: transform; }
     .mobile-menu-container .nav-tab.active::after { will-change: transform; }
     .mobile-menu-container .nav-tab.active::before { will-change: transform; }
     .tab-indicator { will-change: left, width; }
@@ -1002,15 +1011,17 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     .logo-icon { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     .mobile-menu-container .nav-tab { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
-    /* Faster button current animations */
+    /* Faster & brighter button current — visible on tablet */
     .mobile-menu-container .nav-tab.active {
         animation: currentPulse 1.5s ease-in-out infinite;
     }
     .mobile-menu-container .nav-tab.active::after {
         animation: currentRadiate 2s linear infinite;
+        filter: drop-shadow(0 0 4px rgba(74,140,63,0.6));
     }
     .mobile-menu-container .nav-tab.active::before {
         animation: currentRadiate 2.5s linear infinite reverse;
+        filter: drop-shadow(0 0 6px rgba(74,140,63,0.4));
     }
 
     /* Smooth tab indicator */
