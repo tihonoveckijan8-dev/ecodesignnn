@@ -949,12 +949,12 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     .mc-boost .chip-core {
         animation-duration: 1s !important;
         opacity: 0.5 !important;
-        filter: drop-shadow(0 0 8px rgba(0,229,255,0.7));
+        filter: drop-shadow(0 0 8px rgba(124,185,110,0.7));
     }
     .mc-boost .chip-dot {
         animation-duration: 0.8s !important;
         opacity: 0.9 !important;
-        filter: drop-shadow(0 0 4px rgba(0,229,255,0.9));
+        filter: drop-shadow(0 0 4px rgba(124,185,110,0.9));
     }
     .mc-boost .chip-dot-inner {
         animation-duration: 0.7s !important;
@@ -965,7 +965,7 @@ a, button, .nav-tab, .card, .work-card, .dot, .slider-btn, .btn-primary, input, 
     }
     /* Усиление свечения всех частиц при boost */
     .mc-boost svg circle[r] {
-        filter: brightness(1.6) drop-shadow(0 0 8px rgba(0,229,255,0.9));
+        filter: brightness(1.6) drop-shadow(0 0 8px rgba(124,185,110,0.9));
         transition: filter 0.3s ease-out;
     }
     /* Усиление яркости трасс при boost */
